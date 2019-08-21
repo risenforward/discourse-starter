@@ -1,0 +1,21 @@
+position:
+  default: bottom
+  type: enum
+  choices:
+  - top
+  - bottom
+  - top-left
+  - top-right
+  - bottom-left
+  - bottom-right
+  description: 
+    en: 'The position of the cookie banner relative to the page'
+popup_background_color:
+  type: string
+  default: "#000"
+popup_text_color:
+  type: string
+  default: "#fff"
+main_text:
+  type: string
+  default: "This website uses cookies to ensure you get the best experience on our website."

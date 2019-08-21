@@ -1,0 +1,75 @@
+// -------------------------------------------------------------------------------------
+// banner.min
+// repo:    https://github.com/insites/cookieconsent
+// version: 3.1.0
+// authors: Alex Morley-Finch, Piiu Pilt, Oliver Emberton, David Ball, Adam Hutchinson
+// license: MIT https://github.com/insites/cookieconsent/blob/master/licence
+// -------------------------------------------------------------------------------------
+$cta-background-color: #FE4644;
+$cta-text-color: #FFFFFF;
+
+.banner-ad {
+    display: flex;
+    clear: both;
+    max-width: calc(#{$topic-body-width} + #{$topic-avatar-width} + (#{$topic-body-width-padding} * 2));
+    background-color: #FEF25E;
+    border: 1px solid $primary;
+    box-sizing: border-box;
+    img {
+        height: 90px;
+        &.desktop {
+            display: block;
+        }
+        &.mobile {
+            display: none;
+        }
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        p {
+            margin: 0;
+            &.small {
+                font-weight: bold;
+                text-align: right;
+                padding: 1px 5px;
+                background-color: #000000;
+                color: #FFFFFF;
+            }
+            &.big {
+                font-size: 24px;
+                line-height: normal;
+                padding-bottom: 5px;
+                color: #434343;
+                font-weight: lighter;
+            }
+        }
+        .cta {
+            color: $cta-text-color;
+            background-color: $cta-background-color;
+            &:hover {
+                background-color: darken($cta-background-color, 20%);
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 672px) {
+    .banner-ad {
+        img.desktop, p {
+            display: none;
+        }
+        img.mobile {
+            display: block;
+        }
+        .container {
+            justify-content: center;
+            .cta {
+                margin: 0 5px;
+                font-size: 12px;
+            }
+        }
+    }
+}
