@@ -1,25 +1,35 @@
-<script type="text/discourse-plugin" version="0.8.20">
-  const adbutlerbanner = settings.main_text;
-  const h = require("virtual-dom").h;
- let url = document.URL;
-let topic_adid = url.substring(url.lastIndexOf('/') + 1);
-
-    api.createWidget("adbutler-widget", {
-      tagName: "div.adbutler-widget",
-      
-      html() {
-        return h('h1', { innerHTML: adbutlerbanner });
-        //return h('h1', category);
-        //return h('h1', topic);
+<script type="text/discourse-plugin" version="0.8">
+  const container = Discourse.__container__;
+  const { h } = require('virtual-dom');
+  api.createWidget('adbutler-widget', {
+      tagName: 'span',
+      html(attrs, state) {
+          const path = window.location.pathname;
+          let category;
+          const controller = container.lookup('controller:navigation/category');
+          category = controller.get("category");
+          if(/^\/t\//.test(path)) {
+              $("body").addClass("adbutler");
+              return h('a.fancy-title', {
+                  "attributes" : {
+                      "style" : "color: #" + category.color + ";"
+                  }
+              });
+          } else {
+              $("body").removeClass("adbutler");
+          }
       }
-     
+  }),
+  api.decorateWidget('adbutler-widget:after', helper => {
+      helper.widget.appEvents.on('page:changed', () => {
+          helper.widget.scheduleRerender();
+      });
   });
-  //console.log(Discourse);
- //console.log(window.location.search);
 </script>
 
-<script type="text/x-handlebars" data-template-name="/connectors/topic-above-footer-buttons/adbutler-widget">
-   
-   {{mount-widget widget="adbutler-widget"}}
-   
+<script
+  type="text/x-handlebars"
+  data-template-name="/connectors/below-site-header/adbutler-widget"
+>
+  {{mount-widget widget="adbutler-widget"}}
 </script>
