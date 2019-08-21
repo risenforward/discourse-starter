@@ -1,6 +1,8 @@
 <script type="text/discourse-plugin" version="0.8">
   const container = Discourse.__container__;
+  const adbutler = settings.main_text
   const { h } = require('virtual-dom');
+  const { iconNode } = require("discourse-common/lib/icon-library");
   api.createWidget('adbutler-widget', {
       tagName: 'span',
       html(attrs, state) {
@@ -10,10 +12,11 @@
           category = controller.get("category");
           if(/^\/t\//.test(path)) {
               $("body").addClass("adbutler");
-              return h('a.fancy-title', {
+              return h('h1', {
                   "attributes" : {
                       "style" : "color: #" + category.color + ";"
-                  }
+                  },
+                  innerHTML: adbutler
               });
           } else {
               $("body").removeClass("adbutler");
