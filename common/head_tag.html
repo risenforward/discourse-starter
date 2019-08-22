@@ -15,7 +15,9 @@
             const isTopic = settings.topic_ids.split("|").includes(topicId);
             let isTag;
             if (tags.length) {
-              isTag = settings.tags.split("|").filter(tag => tags.includes(tag));
+              tags.forEach(function(tag) {
+                isTag = settings.tags.split("|").includes(tag);
+              });
             }
             console.log(topicController);
             console.log(tags);
