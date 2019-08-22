@@ -17,6 +17,7 @@
             if (tags.length) {
               tags.forEach(function(tag) {
                 isTag = settings.tags.split("|").includes(tag);
+                if (isTag) break;
               });
             }
             console.log(topicController);
