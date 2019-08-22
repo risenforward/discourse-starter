@@ -15,14 +15,11 @@
             const isTopic = settings.topic_ids.split("|").includes(topicId);
             let isTag;
             if (tags.length) {
-              tags.forEach(function(tag) {
-                isTag = settings.tags.split("|").includes(tag);
-                if (isTag) break;
-              });
+              isTag = settings.tags.split("|").filter(tag => tags.includes(tag));
             }
             console.log(topicController);
-            console.log(tags);
-            if(isTopic || isTag) {
+            console.log(isTag);
+            if(isTopic || isTag === '') {
               $("body").addClass("adbutler");
               return h('h2.gdpr-compliant', {
                   "attributes" : {
