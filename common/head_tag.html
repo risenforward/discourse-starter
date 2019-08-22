@@ -7,19 +7,20 @@
       html(attrs, state) {
           const path = window.location.pathname;
           if(/^\/t\//.test(path)) {
+            const tagController = container.lookup('controller:tags');
             const topicController = container.lookup("controller:topic");
             let topic;
             topicId = topicController.get("target.currentRoute.parent.params.id");
             const isTopic = settings.topic_ids.split("|").includes(topicId);
             console.log(topicController);
-            console.log(topicId);
+            console.log(tagController);
             if(isTopic) {
               $("body").addClass("adbutler");
               return h('h2.gdpr-compliant', {
                   "attributes" : {
                       "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
                   },
-                  innerHTML: adbutler + topicId
+                  innerHTML: adbutler
               });
             }
           } else {
