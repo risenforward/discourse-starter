@@ -9,17 +9,19 @@
           if(/^\/t\//.test(path)) {
             const topicController = container.lookup("controller:topic");
             let topic;
-            topic = topicController.get("target.currentRoute.params.topic_id");
-            console.log(topicController.get("topic"));
+            topicId = topicController.get("target.currentRoute.parent.params.id");
+            const isTopic = settings.topic_ids.split("|").includes(topicId);
             console.log(topicController);
-            console.log(topic);
-            $("body").addClass("adbutler");
-            return h('h2.gdpr-compliant', {
-                "attributes" : {
-                    "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
-                },
-                innerHTML: adbutler + topic
-            });
+            console.log(topicId);
+            if(isTopic) {
+              $("body").addClass("adbutler");
+              return h('h2.gdpr-compliant', {
+                  "attributes" : {
+                      "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
+                  },
+                  innerHTML: adbutler + topicId
+              });
+            }
           } else {
               $("body").removeClass("adbutler");
           }

@@ -19,3 +19,7 @@ popup_text_color:
 main_text:
   type: string
   default: "This website uses cookies to ensure you get the best experience on our website."
+topic_ids:
+  default: ""
+  type: list
+  description: "Ads will only show for these topics"
