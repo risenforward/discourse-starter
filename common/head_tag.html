@@ -10,7 +10,7 @@
             const topicController = container.lookup("controller:topic");
             let topic;
             topic = topicController.get("target.currentRoute.params.topic_id");
-            console.log(target.currentRoute.params.topic_id);
+            console.log(topicController.get("topic"));
             console.log(topicController);
             console.log(topic);
             $("body").addClass("adbutler");
