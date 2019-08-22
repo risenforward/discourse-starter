@@ -9,18 +9,16 @@
           if(/^\/t\//.test(path)) {
             const topicController = container.lookup("controller:topic");
             let topicId;
-            let tagId;
+            let tags;
             topicId = topicController.get("target.currentRoute.parent.params.id");
             tags = topicController.get("target.currentRoute.parent.attributes.tags");
             const isTopic = settings.topic_ids.split("|").includes(topicId);
-            let isTag = false;
+            let isTag;
             if (tags.length) {
-              tags.forEach(function(tag) {
-                isTag = settings.tags.split("|").includes(tag);
-              });
+              isTag = settings.tags.split("|").filter(tag => tags.includes(tag));
             }
-            console.log(settings.topic_ids.split("|"));
-            console.log(tagId);
+            console.log(topicController);
+            console.log(tags);
             if(isTopic || isTag) {
               $("body").addClass("adbutler");
               return h('h2.gdpr-compliant', {
