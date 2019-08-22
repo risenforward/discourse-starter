@@ -19,7 +19,7 @@
             }
             console.log(topicController);
             console.log(isTag);
-            if(isTopic || isTag === '') {
+            if(isTopic || isTag.length) {
               $("body").addClass("adbutler");
               return h('h2.gdpr-compliant', {
                   "attributes" : {
