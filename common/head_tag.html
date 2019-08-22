@@ -7,13 +7,15 @@
       html(attrs, state) {
           const path = window.location.pathname;
           if(/^\/t\//.test(path)) {
-              $("body").addClass("adbutler");
-              return h('h2.gdpr-compliant', {
-                  "attributes" : {
-                      "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
-                  },
-                  innerHTML: adbutler
-              });
+            const topicController = container.lookup("controller:topic");
+            topic = topicController.get("target.currentRoute.params.topic_id");
+            $("body").addClass("adbutler");
+            return h('h2.gdpr-compliant', {
+                "attributes" : {
+                    "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
+                },
+                innerHTML: adbutler + topic
+            });
           } else {
               $("body").removeClass("adbutler");
           }
