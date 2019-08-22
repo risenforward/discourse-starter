@@ -13,7 +13,7 @@
             topicId = topicController.get("target.currentRoute.parent.params.id");
             tags = topicController.get("target.currentRoute.parent.attributes.tags");
             const isTopic = settings.topic_ids.split("|").includes(topicId);
-            const isTag = false;
+            let isTag = false;
             if (tags.length) {
               tags.forEach(function(tag) {
                 isTag = settings.tags.split("|").includes(tag);
