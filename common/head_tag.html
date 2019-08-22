@@ -7,14 +7,21 @@
       html(attrs, state) {
           const path = window.location.pathname;
           if(/^\/t\//.test(path)) {
-            const tagController = container.lookup('controller:tags');
             const topicController = container.lookup("controller:topic");
-            let topic;
+            let topicId;
+            let tagId;
             topicId = topicController.get("target.currentRoute.parent.params.id");
+            tags = topicController.get("target.currentRoute.parent.attributes.tags");
             const isTopic = settings.topic_ids.split("|").includes(topicId);
-            console.log(topicController);
-            console.log(tagController);
-            if(isTopic) {
+            const isTag = false;
+            if (tags.length) {
+              tags.forEach(function(tag) {
+                isTag = settings.tags.split("|").includes(tag);
+              });
+            }
+            console.log(settings.topic_ids.split("|"));
+            console.log(tagId);
+            if(isTopic || isTag) {
               $("body").addClass("adbutler");
               return h('h2.gdpr-compliant', {
                   "attributes" : {
