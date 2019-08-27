@@ -1,6 +1,7 @@
 <script type="text/discourse-plugin" version="0.8">
   const container = Discourse.__container__;
   const { h } = require('virtual-dom');
+  const msgBody;
 
   function exists(item) {
     return (
@@ -36,13 +37,21 @@
               }
               console.log(topicController);
               console.log(isTag);
-              if(isTopic || (isTag && isTag.length)) {
+              if(isTag) {
+                msgBody = `<a href="${link}">
+                             <img
+                              src="${image}"
+                             />
+                             <span>
+                              ${message}
+                             </span>
+                           </a>`;
                 $("body").addClass("adbutler");
                 return h('h2.gdpr-compliant', {
                     "attributes" : {
                         "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
                     },
-                    innerHTML: message
+                    innerHTML: msgBody
                 });
               }
             });
