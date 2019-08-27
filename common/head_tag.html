@@ -13,29 +13,29 @@
             topicId = topicController.get("target.currentRoute.parent.params.id");
             tags = topicController.get("target.currentRoute.parent.attributes.tags");
             const isTopic = settings.topic_ids.split("|").includes(topicId);
-            $.each(messages, function() {
-              let msg = $.map(this.split(","), $.trim);
-              const msgTag = msg[3],
-                link = msg[1],
-                message = msg[0],
-                image = msg[2];
-              if (tags.length) {
+            if (tags && tags.length) {
+              $.each(messages, function() {
+                let msg = $.map(this.split(","), $.trim);
+                const msgTag = msg[3],
+                  link = msg[1],
+                  message = msg[0],
+                  image = msg[2];
                 isTag = tags.includes(msgTag);
-              }
-              console.log(topicController);
-              console.log(isTag);
-              if(isTag) {
-                msgBody = `<a href="${link}">
-                             <img
-                              src="${image}"
-                             />
-                             <span>
-                              ${message}
-                             </span>
-                           </a>`;
-                return false;
-              }
-            });
+                console.log(topicController);
+                console.log(isTag);
+                if(isTag) {
+                  msgBody = `<a href="${link}">
+                              <img
+                                src="${image}"
+                              />
+                              <span>
+                                ${message}
+                              </span>
+                            </a>`;
+                  return false;
+                }
+              });
+            }
 
             if(isTag) {
               $("body").addClass("adbutler");
