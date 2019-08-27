@@ -17,7 +17,7 @@ topic_ids:
   default: ""
   type: list
   description: "Ads will only show for these topics"
-tags:
+Messages:
   default: ""
   type: list
-  description: "Ads will only show for these tags"
+  description: "Add messages with associated values. One tag per message in this order: Message, Hyperlink, Image, Tag.<br><b>Message:</b> the message content<br><b>Hyperlink:</b> the link of this message<br><b>Image:</b> the image url of this message<br><b>Tag:</b> the tag for this message"
