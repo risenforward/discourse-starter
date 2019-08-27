@@ -20,7 +20,7 @@
           const path = window.location.pathname;
           if(/^\/t\//.test(path)) {
             const topicController = container.lookup("controller:topic");
-            let topicId, tags, isTag,
+            let topicId, tags, isTag, msgBody,
               messages = $.map(settings.Messages.split("|"), $.trim);
             topicId = topicController.get("target.currentRoute.parent.params.id");
             tags = topicController.get("target.currentRoute.parent.attributes.tags");
@@ -37,7 +37,7 @@
               console.log(topicController);
               console.log(isTag);
               if(isTag) {
-                const msgBody = `<a href="${link}">
+                msgBody = `<a href="${link}">
                              <img
                               src="${image}"
                              />
@@ -45,15 +45,19 @@
                               ${message}
                              </span>
                            </a>`;
-                $("body").addClass("adbutler");
-                return h('h2.gdpr-compliant', {
-                    "attributes" : {
-                        "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
-                    },
-                    innerHTML: msgBody
-                });
+                return;
               }
             });
+
+            if(isTag) {
+              $("body").addClass("adbutler");
+              return h('h2.gdpr-compliant', {
+                  "attributes" : {
+                      "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
+                  },
+                  innerHTML: msgBody
+              });
+            }
           } else {
               $("body").removeClass("adbutler");
           }
