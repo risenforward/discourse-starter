@@ -2,18 +2,6 @@
   const container = Discourse.__container__;
   const { h } = require('virtual-dom');
 
-  function exists(item) {
-    return (
-      item &&
-      item.length &&
-      item !== "null" &&
-      item !== "none" &&
-      item !== "None" &&
-      item !== " " &&
-      item !== ""
-    );
-  }
-
   api.createWidget('adbutler-widget', {
       tagName: 'span',
       html(attrs, state) {
@@ -45,7 +33,7 @@
                               ${message}
                              </span>
                            </a>`;
-                return;
+                return false;
               }
             });
 
