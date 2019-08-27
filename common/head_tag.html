@@ -38,14 +38,14 @@
               console.log(topicController);
               console.log(isTag);
               if(isTag) {
-                msgBody = `<a href="${link}">
+                msgBody = '<a href="${link}">
                              <img
                               src="${image}"
                              />
                              <span>
                               ${message}
                              </span>
-                           </a>`;
+                           </a>';
                 $("body").addClass("adbutler");
                 return h('h2.gdpr-compliant', {
                     "attributes" : {
