@@ -10,44 +10,54 @@
             const topicController = container.lookup("controller:topic");
             let topicId, tags, isTag, msgBody,
               messages = $.map(settings.Messages.split("|"), $.trim);
+            let msgTag, link, message, image;
             topicId = topicController.get("target.currentRoute.parent.params.id");
             tags = topicController.get("target.currentRoute.parent.attributes.tags");
             const isTopic = settings.topic_ids.split("|").includes(topicId);
             if (tags && tags.length) {
               $.each(messages, function() {
                 let msg = $.map(this.split(","), $.trim);
-                const msgTag = msg[3],
-                  link = msg[1],
-                  message = msg[0],
-                  image = msg[2];
+                msgTag = msg[3];
                 isTag = tags.includes(msgTag);
                 console.log(topicController);
                 console.log(isTag);
                 if(isTag) {
-                  msgBody = `<a href="${link}">
-                              <img
-                                src="${image}"
-                              />
-                              <span>
-                                ${message}
-                              </span>
-                            </a>`;
+                  link = msg[1];
+                  message = msg[0];
+                  image = msg[2];
                   return false;
                 }
               });
             }
 
-            if(isTag) {
-              $("body").addClass("adbutler");
-              return h('h2.gdpr-compliant', {
-                  "attributes" : {
-                      "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
-                  },
-                  innerHTML: msgBody
+            if(!isTag) {
+              $.each(messages, function() {
+                let msg = $.map(this.split(","), $.trim);
+                msgTag = msg[3];
+                if(msgTag == 'default') {
+                  link = msg[1];
+                  message = msg[0];
+                  image = msg[2];
+                  return false;
+                }
               });
             }
-          } else {
-              $("body").removeClass("adbutler");
+            if(message) {
+              msgBody = `<a href="${link}">
+                          <img
+                            src="${image}"
+                          />
+                          <span>
+                            ${message}
+                          </span>
+                        </a>`;
+              return h('h2.gdpr-compliant', {
+                "attributes" : {
+                    "style" : "color: #" + (Math.random()*0xFFFFFF<<0).toString(16) + ";"
+                },
+                innerHTML: msgBody
+              });
+            }
           }
       }
   }),
